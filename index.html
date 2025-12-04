@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Palmerston North Historical Maps</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([-40.355, 175.611], 13); // Palmerston North coords
+
+    // Base layer (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Historical map tiles
+    var histMap = L.tileLayer('./tiles/{z}/{x}/{y}.png', {
+      attribution: 'Historical Map'
+    }).addTo(map);
+
+    // You can add layer controls
+    var baseMaps = { "OSM": map };
+    var overlayMaps = { "Historical Map": histMap };
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
+  </script>
+</body>
+</html>
