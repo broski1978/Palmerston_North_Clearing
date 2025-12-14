@@ -36,6 +36,9 @@
     <label>1874 Map Opacity
       <input id="opacity1874" type="range" min="0" max="1" step="0.1" value="1">
     </label>
+	<label>1881 Map Opacity
+      <input id="opacity1881" type="range" min="0" max="1" step="0.1" value="1">
+    </label>
     <label>1989 Map Opacity
       <input id="opacity1989" type="range" min="0" max="1" step="0.1" value="1">
     </label>
@@ -55,9 +58,10 @@
   }).addTo(map);
 
   // Historical layers
-  var map1866 = L.tileLayer('./1866Map/{z}/{x}/{y}.png', { attribution: '1866 Map' });
+  var map1866 = L.tileLayer('./1866Map/{z}/{x}/{y}.png', { attribution: '1866 Map' });  
   var map1874 = L.tileLayer('./1874Map/{z}/{x}/{y}.png', { attribution: '1874 Map' });
   var map1989 = L.tileLayer('./1989Map/{z}/{x}/{y}.png', { attribution: '1989 Map' });
+  var map1881 = L.tileLayer('./1881Map/{z}/{x}/{y}.png', { attribution: '1881 Map' });
   var demLayer = L.tileLayer('./DEM/{z}/{x}/{y}.png', { attribution: 'DEM' });
 
   // Layer controls
@@ -65,7 +69,8 @@
   var overlayMaps = {
     "1866 Map": map1866,
     "1874 Map": map1874,
-    "1989 Map": map1989,
+    "1881 Map": map1881,
+	"1989 Map": map1989,	
     "DEM": demLayer
   };
   L.control.layers(baseMaps, overlayMaps).addTo(map);
@@ -77,6 +82,9 @@
     document.getElementById('opacity1874').addEventListener('input', function(e) {
       map1874.setOpacity(e.target.value);
     });
+	document.getElementById('opacity1881').addEventListener('input', function(e) {
+      map1881.setOpacity(e.target.value);
+	});
     document.getElementById('opacity1989').addEventListener('input', function(e) {
       map1989.setOpacity(e.target.value);
     });
@@ -99,6 +107,7 @@
       // Remove all overlays
       map.removeLayer(map1866);
       map.removeLayer(map1874);
+	  map.removeLayer(map1881);
       map.removeLayer(map1989);
       map.removeLayer(demLayer);
     };
